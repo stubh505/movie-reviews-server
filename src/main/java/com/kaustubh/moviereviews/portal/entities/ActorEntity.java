@@ -1,6 +1,7 @@
 package com.kaustubh.moviereviews.portal.entities;
 
 import com.kaustubh.moviereviews.portal.enums.Country;
+import com.kaustubh.moviereviews.portal.enums.Gender;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -38,6 +39,10 @@ public class ActorEntity {
     @Column(columnDefinition = "country_type")
     @Type(type = "pgsql_enum")
     private Country country;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "gender_type")
+    @Type(type = "pgsql_enum")
+    private Gender gender;
 
     public String getActorId() {
         return actorId;
@@ -77,5 +82,13 @@ public class ActorEntity {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

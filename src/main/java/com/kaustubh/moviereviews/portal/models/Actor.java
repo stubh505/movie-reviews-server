@@ -1,6 +1,7 @@
 package com.kaustubh.moviereviews.portal.models;
 
 import com.kaustubh.moviereviews.portal.enums.Country;
+import com.kaustubh.moviereviews.portal.enums.Gender;
 
 import java.time.LocalDate;
 
@@ -10,6 +11,7 @@ public class Actor {
     private String image;
     private LocalDate dateOfBirth;
     private Country country;
+    private Gender gender;
 
     public String getActorId() {
         return actorId;
@@ -49,5 +51,13 @@ public class Actor {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

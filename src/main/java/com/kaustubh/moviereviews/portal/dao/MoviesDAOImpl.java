@@ -2,8 +2,10 @@ package com.kaustubh.moviereviews.portal.dao;
 
 import com.kaustubh.moviereviews.portal.dao.mappers.MovieMapper;
 import com.kaustubh.moviereviews.portal.entities.MoviesEntity;
+import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,6 +18,9 @@ public class MoviesDAOImpl implements MoviesDAO {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private Environment environment;
 
     @Override
     public String addMovie(Movie movie) {
@@ -47,8 +52,13 @@ public class MoviesDAOImpl implements MoviesDAO {
     @Override
     public Movie editMovie(String movieId, Movie movie) {
         MoviesEntity entity = entityManager.find(MoviesEntity.class, movieId);
+
+        if (entity == null)
+            throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
+
         entity = new MovieMapper(movie).mapToEntity(entity);
         entityManager.persist(entity);
+        movie.setMovieId(entity.getMovieId());
         return movie;
     }
 }

@@ -1,6 +1,7 @@
 CREATE type country_type AS ENUM ('IN', 'UK', 'US', 'KR', 'DE', 'FR', 'RU');
 CREATE type language_type AS ENUM ('BN', 'HI', 'EN', 'FR', 'DE', 'KR', 'RU')
 CREATE type rating_type AS ENUM ('G', 'PG', 'PG_13', 'R', 'NC_17')
+CREATE type gender_type AS ENUM ('MALE', 'FEMALE', 'NON_BINARY')
 
 create table actor (
     actor_id varchar(255) not null,

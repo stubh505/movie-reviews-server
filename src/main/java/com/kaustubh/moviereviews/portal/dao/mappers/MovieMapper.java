@@ -36,17 +36,17 @@ public class MovieMapper {
         for (Genre g:model.getGenre()) {
             s.append(g.name()).append("|");
         }
-        entity.setGenre(s.substring(0, s.length()-2));
+        entity.setGenre(s.substring(0, s.length()-1));
         s = new StringBuilder();
         for (Actor a:model.getCast()) {
             s.append(a.getName()).append("|");
         }
-        entity.setCastActor(s.substring(0, s.length()-2));
+        entity.setCastActor(s.substring(0, s.length()-1));
         
         return entity;
     }
 
-    public Movie mapToModel (Movie movie) {
+    public Movie mapToModel (Movie model) {
         model.setMovieId(entity.getMovieId());
         model.setName(entity.getName());
         model.setCountry(entity.getCountry());

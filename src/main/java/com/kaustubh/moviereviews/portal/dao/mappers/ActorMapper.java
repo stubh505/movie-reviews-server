@@ -16,21 +16,21 @@ public class ActorMapper {
         this.model = model;
     }
 
-    public Actor mapToModel () {
-        Actor model = new Actor();
+    public Actor mapToModel (Actor model) {
         model.setActorId(entity.getActorId());
         model.setCountry(entity.getCountry());
         model.setDateOfBirth(entity.getDateOfBirth());
+        model.setGender(entity.getGender());
         model.setImage(entity.getImage());
         model.setName(entity.getName());
 
         return model;
     }
 
-    public ActorEntity mapToEntity () {
-        ActorEntity entity = new ActorEntity();
+    public ActorEntity mapToEntity (ActorEntity entity) {
         entity.setCountry(model.getCountry());
         entity.setDateOfBirth(model.getDateOfBirth());
+        entity.setGender(model.getGender());
         entity.setImage(model.getImage());
         entity.setName(model.getName());
 
