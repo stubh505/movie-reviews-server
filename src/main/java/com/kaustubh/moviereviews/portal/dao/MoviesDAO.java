@@ -8,5 +8,5 @@ public interface MoviesDAO {
     String addMovie(Movie movie);
     Movie getMovie(String movieId);
     List<Movie> getAll();
-    Movie editMovie(String movieId);
+    Movie editMovie(String movieId, Movie movie);
 }

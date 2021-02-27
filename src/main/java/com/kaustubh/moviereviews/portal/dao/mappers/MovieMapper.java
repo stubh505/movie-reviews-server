@@ -21,8 +21,7 @@ public class MovieMapper {
         this.model = model;
     }
 
-    public MoviesEntity mapToEntity () {
-        MoviesEntity entity = new MoviesEntity();
+    public MoviesEntity mapToEntity (MoviesEntity entity) {
         entity.setName(model.getName());
         entity.setCountry(model.getCountry());
         entity.setDirector(model.getDirector());
@@ -47,8 +46,7 @@ public class MovieMapper {
         return entity;
     }
 
-    public Movie mapToModel () {
-        Movie model = new Movie();
+    public Movie mapToModel (Movie movie) {
         model.setMovieId(entity.getMovieId());
         model.setName(entity.getName());
         model.setCountry(entity.getCountry());
