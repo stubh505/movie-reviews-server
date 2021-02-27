@@ -1,14 +1,23 @@
-package com.kaustubh.moviereviews.portal.model;
+package com.kaustubh.moviereviews.portal.models;
 
 import com.kaustubh.moviereviews.portal.enums.Country;
 
 import java.time.LocalDate;
 
 public class Actor {
+    private String actorId;
     private String name;
     private String image;
     private LocalDate dateOfBirth;
     private Country country;
+
+    public String getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(String actorId) {
+        this.actorId = actorId;
+    }
 
     public String getName() {
         return name;

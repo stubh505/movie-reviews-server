@@ -1,4 +1,4 @@
-package com.kaustubh.moviereviews.portal.model;
+package com.kaustubh.moviereviews.portal.models;
 
 import com.kaustubh.moviereviews.portal.enums.Country;
 import com.kaustubh.moviereviews.portal.enums.Genre;
@@ -15,7 +15,7 @@ public class Movie {
     private String director;
     private List<Actor> cast;
     private String synopsys;
-    private Genre genre;
+    private List<Genre> genre;
     private String poster;
     private String trailer;
     private int length;
@@ -71,11 +71,11 @@ public class Movie {
         this.synopsys = synopsys;
     }
 
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 

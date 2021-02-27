@@ -1,6 +1,6 @@
 package com.kaustubh.moviereviews.portal.api;
 
-import com.kaustubh.moviereviews.portal.model.Movie;
+import com.kaustubh.moviereviews.portal.models.Movie;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class MoviesAPI {
         return null;
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public String addMovie (@RequestBody String movie) {
         return null;
     }
