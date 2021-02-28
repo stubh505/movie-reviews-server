@@ -1,12 +1,38 @@
 package com.kaustubh.moviereviews.portal.dao;
 
+import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Movie;
 
 import java.util.List;
 
 public interface MoviesDAO {
+
+    /**
+     * Method to persist new Movie
+     * @param movie Movie object
+     * @return movieId
+     */
     String addMovie(Movie movie);
+
+    /**
+     * Method to retrieve movie by id
+     * @param movieId movie id
+     * @return movie
+     */
     Movie getMovie(String movieId);
+
+    /**
+     * Method to return all movies
+     * @return List of Movies
+     */
     List<Movie> getAll();
+
+    /**
+     * Method to update details of existing movie
+     * @param movieId movie id
+     * @param movie new movie body
+     * @return persisted movie
+     * @throws MovieNotFoundException when movie not found
+     */
     Movie editMovie(String movieId, Movie movie);
 }

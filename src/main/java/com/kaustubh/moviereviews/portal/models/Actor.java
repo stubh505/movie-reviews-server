@@ -12,6 +12,7 @@ public class Actor {
     private LocalDate dateOfBirth;
     private Country country;
     private Gender gender;
+    private int movieCount;
 
     public String getActorId() {
         return actorId;
@@ -59,5 +60,26 @@ public class Actor {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public int getMovieCount() {
+        return movieCount;
+    }
+
+    public void setMovieCount(int movieCount) {
+        this.movieCount = movieCount;
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "actorId='" + actorId + '\'' +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", country=" + country +
+                ", gender=" + gender +
+                ", movieCount=" + movieCount +
+                '}';
     }
 }

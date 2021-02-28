@@ -32,6 +32,10 @@ public class MoviesDAOImpl implements MoviesDAO {
     @Override
     public Movie getMovie(String movieId) {
         MoviesEntity entity = entityManager.find(MoviesEntity.class, movieId);
+
+        if (entity == null)
+            throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
+
         Movie movie = new MovieMapper(entity).mapToModel(new Movie());
         return movie;
     }

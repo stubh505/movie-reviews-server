@@ -43,6 +43,7 @@ public class ActorEntity {
     @Column(columnDefinition = "gender_type")
     @Type(type = "pgsql_enum")
     private Gender gender;
+    private int movieCount;
 
     public String getActorId() {
         return actorId;
@@ -90,5 +91,13 @@ public class ActorEntity {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public int getMovieCount() {
+        return movieCount;
+    }
+
+    public void setMovieCount(int movieCount) {
+        this.movieCount = movieCount;
     }
 }

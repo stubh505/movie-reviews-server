@@ -23,6 +23,7 @@ public class ActorMapper {
         model.setGender(entity.getGender());
         model.setImage(entity.getImage());
         model.setName(entity.getName());
+        model.setMovieCount(entity.getMovieCount());
 
         return model;
     }
@@ -33,6 +34,7 @@ public class ActorMapper {
         entity.setGender(model.getGender());
         entity.setImage(model.getImage());
         entity.setName(model.getName());
+        entity.setMovieCount(model.getMovieCount());
 
         return entity;
     }
