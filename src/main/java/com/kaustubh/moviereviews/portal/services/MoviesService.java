@@ -1,7 +1,9 @@
 package com.kaustubh.moviereviews.portal.services;
 
+import com.kaustubh.moviereviews.portal.exceptions.ActorNotFoundException;
 import com.kaustubh.moviereviews.portal.exceptions.InvalidMovieException;
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
+import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
 
 import java.util.List;
@@ -39,4 +41,12 @@ public interface MoviesService {
      * @throws InvalidMovieException when movie details invalid
      */
     Movie editMovie(String movieId, Movie movie);
+
+    /**
+     * Service Method to retrieve actors of existing movie
+     * @param movieId movie id
+     * @return list of actors
+     * @throws ActorNotFoundException if actor does not exist
+     */
+    List<Actor> getAllActors(String movieId);
 }

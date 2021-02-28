@@ -1,6 +1,7 @@
 package com.kaustubh.moviereviews.portal.dao;
 
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
+import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
 
 import java.util.List;
@@ -35,4 +36,12 @@ public interface MoviesDAO {
      * @throws MovieNotFoundException when movie not found
      */
     Movie editMovie(String movieId, Movie movie);
+
+    /**
+     * Method to retrieve actors of existing movie
+     * @param movieId movie id
+     * @return list of actors
+     * @throws MovieNotFoundException when movie not found
+     */
+    List<Actor> getAllActors(String movieId);
 }

@@ -3,7 +3,9 @@ package com.kaustubh.moviereviews.portal.dao;
 import com.kaustubh.moviereviews.portal.dao.mappers.MovieMapper;
 import com.kaustubh.moviereviews.portal.entities.MoviesEntity;
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
+import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
+import com.kaustubh.moviereviews.portal.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,9 @@ public class MoviesDAOImpl implements MoviesDAO {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private ActorsDAO actorsDAO;
+
     @Override
     public String addMovie(Movie movie) {
         MoviesEntity moviesEntity = new MovieMapper(movie).mapToEntity(new MoviesEntity());
@@ -37,6 +42,14 @@ public class MoviesDAOImpl implements MoviesDAO {
             throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
 
         Movie movie = new MovieMapper(entity).mapToModel(new Movie());
+        List<Actor> actors = new ArrayList<>();
+        String[] names = entity.getCastActor().split("\\|");
+
+        for (String name:names) {
+            actors.add(actorsDAO.getActorByName(name));
+        }
+
+        movie.setCast(actors);
         return movie;
     }
 
@@ -64,5 +77,22 @@ public class MoviesDAOImpl implements MoviesDAO {
         entityManager.persist(entity);
         movie.setMovieId(entity.getMovieId());
         return movie;
+    }
+
+    @Override
+    public List<Actor> getAllActors(String movieId) {
+        MoviesEntity entity = entityManager.find(MoviesEntity.class, movieId);
+
+        if (entity == null)
+            throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
+
+        List<Actor> actors = new ArrayList<>();
+        String[] names = entity.getCastActor().split("\\|");
+
+        for (String name:names) {
+            actors.add(actorsDAO.getActorByName(name));
+        }
+
+        return actors;
     }
 }

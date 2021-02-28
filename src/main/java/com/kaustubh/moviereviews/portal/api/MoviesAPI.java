@@ -4,8 +4,7 @@ import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
 import com.kaustubh.moviereviews.portal.models.Review;
 import com.kaustubh.moviereviews.portal.services.MoviesService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
+import com.kaustubh.moviereviews.portal.services.ReviewsService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,9 @@ public class MoviesAPI {
 
     @Autowired
     private MoviesService moviesService;
+
+    @Autowired
+    private ReviewsService reviewsService;
 
     @GetMapping("/all")
     @ApiOperation("GET all movies")
@@ -59,20 +61,23 @@ public class MoviesAPI {
     @ApiOperation("GET all actors of a movie")
     @ApiResponse(code = 200, message = "Okay")
     public ResponseEntity<List<Actor>> getMovieActors(@PathVariable String movieId) {
-        return null;
+        List<Actor> res = moviesService.getAllActors(movieId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{movieId}/reviews")
     @ApiOperation("GET all reviews of a movie")
     @ApiResponse(code = 200, message = "Okay")
     public ResponseEntity<List<Review>> getMovieReviews(@PathVariable String movieId) {
-        return null;
+        List<Review> res = reviewsService.getAllReviews(movieId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @PostMapping("/{movieId}/reviews/")
-    @ApiOperation("GET all reviews of a movie")
+    @PostMapping("/{movieId}/reviews/add")
+    @ApiOperation("POST method to add review of a movie")
     @ApiResponse(code = 200, message = "Okay")
     public ResponseEntity<String> addReview(@PathVariable String movieId, @RequestBody Review review) {
-        return null;
+        String res = reviewsService.addReview(movieId, review);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

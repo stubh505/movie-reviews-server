@@ -30,7 +30,7 @@ public class UserMapper {
         return model;
     }
 
-    public User mapToEntity (UserEntity entity) {
+    public UserEntity mapToEntity (UserEntity entity) {
         entity.setName(model.getName());
         entity.setDateOfBirth(model.getDateOfBirth());
         entity.setEmail(model.getEmail());
@@ -40,6 +40,6 @@ public class UserMapper {
         entity.setReviewCount(model.getReviewCount());
         entity.setDateOfJoining(model.getDateOfJoining());
 
-        return model;
+        return entity;
     }
 }
