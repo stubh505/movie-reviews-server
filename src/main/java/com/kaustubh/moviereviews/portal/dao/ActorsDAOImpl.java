@@ -6,12 +6,14 @@ import com.kaustubh.moviereviews.portal.exceptions.ActorNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ActorsDAOImpl implements ActorsDAO {
 
     @Autowired

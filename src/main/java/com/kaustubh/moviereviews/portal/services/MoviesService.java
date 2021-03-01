@@ -30,11 +30,11 @@ public interface MoviesService {
     /**
      * Service Method to return all movies
      *
-     * @param name name of actor
+     * @param actorId id of actor
      * @return List of Movies
      * @throws MovieNotFoundException when movie not found
      */
-    List<Movie> getMoviesOfActor(String name);
+    List<Movie> getMoviesOfActor(String actorId);
 
     /**
      * Service Method to return all movies

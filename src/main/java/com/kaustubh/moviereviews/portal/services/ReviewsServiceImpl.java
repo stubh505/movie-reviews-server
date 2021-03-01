@@ -27,6 +27,9 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public List<Review> getAllReviews(String movieId) {
+        if (movieId == null || movieId.equals(""))
+            throw new InvalidReviewException(environment.getProperty("MOVIE_INVALID"));
+
         logger.info("Getting reviews for movie id " + movieId);
         List<Review> res = reviewsDAO.getAllReviews(movieId);
 
@@ -39,6 +42,9 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public List<Review> getUserReviews(String userId) {
+        if (userId == null || userId.equals(""))
+            throw new InvalidReviewException(environment.getProperty("USER_INVALID"));
+
         logger.info("Getting reviews for user id " + userId);
         List<Review> res = reviewsDAO.getUserReviews(userId);
 
@@ -51,6 +57,9 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public String addReview(String movieId, Review review) {
+        if (movieId == null || movieId.equals("") || review == null)
+            throw new InvalidReviewException(environment.getProperty("REVIEW_INVALID"));
+
         logger.info("Adding new review to movie with id : " + movieId + "\n" + review);
         String res = reviewsDAO.addReview(review);
 
@@ -63,6 +72,9 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public Review editReview(String reviewId, Review review) {
+        if (reviewId == null || reviewId.equals("") || review == null)
+            throw new InvalidReviewException(environment.getProperty("REVIEW_INVALID"));
+
         logger.info("Editing review with id " + reviewId);
         Review res = reviewsDAO.editReview(reviewId, review);
 
@@ -75,6 +87,9 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public String deleteReview(String reviewId) {
+        if (reviewId == null || reviewId.equals(""))
+            throw new InvalidReviewException(environment.getProperty("REVIEW_INVALID"));
+
         logger.info("Deleting review with id " + reviewId);
         String res = reviewsDAO.deleteReview(reviewId);
 

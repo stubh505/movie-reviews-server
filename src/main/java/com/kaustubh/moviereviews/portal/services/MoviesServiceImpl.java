@@ -29,6 +29,9 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public String addMovie(Movie movie) {
+        if (movie == null)
+            throw new InvalidMovieException(environment.getProperty("MOVIE_INVALID"));
+
         logger.info("Adding new movie : " + movie);
         String res = moviesDAO.addMovie(movie);
 
@@ -41,6 +44,9 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public Movie getMovie(String movieId) {
+        if (movieId == null || movieId.equals(""))
+            throw new InvalidMovieException(environment.getProperty("MOVIE_INVALID"));
+
         logger.info("Retrieving Movie with id " + movieId);
         Movie res = moviesDAO.getMovie(movieId);
 
@@ -52,14 +58,17 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public List<Movie> getMoviesOfActor(String name) {
-        logger.info("Getting all movies of actor " + name + "...");
-        List<Movie> res = moviesDAO.getMoviesOfActor(name);
+    public List<Movie> getMoviesOfActor(String actorId) {
+        if (actorId == null || actorId.equals(""))
+            throw new InvalidMovieException(environment.getProperty("ACTOR_INVALID"));
+
+        logger.info("Getting all movies of actor " + actorId + "...");
+        List<Movie> res = moviesDAO.getMoviesOfActor(actorId);
 
         if (res == null || res.isEmpty())
             throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
 
-        logger.info("All movies of actor " + name + " retrieved");
+        logger.info("All movies of actor " + actorId + " retrieved");
         return res;
     }
 
@@ -77,6 +86,9 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public Movie editMovie(String movieId, Movie movie) {
+        if (movieId == null || movieId.equals("") || movie == null)
+            throw new InvalidMovieException(environment.getProperty("MOVIE_INVALID"));
+
         logger.info("Editing movie with id : " + movieId);
         logger.info("Updating with new details : " + movie);
         Movie res = moviesDAO.editMovie(movieId, movie);
@@ -90,6 +102,9 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public List<Actor> getAllActors(String movieId) {
+        if (movieId == null || movieId.equals(""))
+            throw new InvalidMovieException(environment.getProperty("MOVIE_INVALID"));
+
         logger.info("Getting all actors for movie with id " + movieId + "...");
         List<Actor> res = moviesDAO.getAllActors(movieId);
 

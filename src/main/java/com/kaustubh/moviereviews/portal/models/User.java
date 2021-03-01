@@ -93,11 +93,6 @@ public class User {
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", dateOfJoining=" + dateOfJoining +
-                ", reviewCount=" + reviewCount +
                 ", userType=" + userType +
                 '}';
     }

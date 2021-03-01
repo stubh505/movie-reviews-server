@@ -34,10 +34,10 @@ public interface MoviesDAO {
     /**
      * Method to return all movies
      *
-     * @param name actor name
+     * @param actorId actor id
      * @return List of Movies
      */
-    List<Movie> getMoviesOfActor(String name);
+    List<Movie> getMoviesOfActor(String actorId);
 
     /**
      * Method to update details of existing movie

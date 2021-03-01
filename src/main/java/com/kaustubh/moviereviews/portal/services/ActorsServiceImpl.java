@@ -8,9 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class ActorsServiceImpl implements ActorsService {
 
     @Autowired
@@ -35,6 +39,9 @@ public class ActorsServiceImpl implements ActorsService {
 
     @Override
     public Actor getActorById(String actorId) {
+        if (actorId == null || actorId.equals(""))
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
+
         logger.info("Getting actor with id " + actorId);
         Actor res = actorsDAO.getActorById(actorId);
 
@@ -47,6 +54,9 @@ public class ActorsServiceImpl implements ActorsService {
 
     @Override
     public Actor getActorByName(String name) {
+        if (name == null || name.equals(""))
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
+
         logger.info("Getting actor with name " + name);
         Actor res = actorsDAO.getActorByName(name);
 
@@ -59,6 +69,9 @@ public class ActorsServiceImpl implements ActorsService {
 
     @Override
     public String addActor(Actor actor) {
+        if (actor == null)
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
+
         logger.info("Adding new actor with details " + actor);
         String res = actorsDAO.addActor(actor);
 
@@ -71,6 +84,9 @@ public class ActorsServiceImpl implements ActorsService {
 
     @Override
     public Actor editActor(String actorId, Actor actor) {
+        if (actor == null || actorId == null || actorId.equals(""))
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
+
         logger.info("Editing actor with details " + actor);
         Actor res = actorsDAO.editActor(actorId, actor);
 
