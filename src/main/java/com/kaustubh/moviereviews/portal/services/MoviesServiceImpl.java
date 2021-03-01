@@ -52,6 +52,18 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
+    public List<Movie> getMoviesOfActor(String name) {
+        logger.info("Getting all movies of actor " + name + "...");
+        List<Movie> res = moviesDAO.getMoviesOfActor(name);
+
+        if (res == null || res.isEmpty())
+            throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
+
+        logger.info("All movies of actor " + name + " retrieved");
+        return res;
+    }
+
+    @Override
     public List<Movie> getAll() {
         logger.info("Getting all movies...");
         List<Movie> res = moviesDAO.getAll();

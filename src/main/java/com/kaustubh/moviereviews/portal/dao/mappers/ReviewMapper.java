@@ -8,15 +8,15 @@ public class ReviewMapper {
     private ReviewEntity entity;
     private Review model;
 
-    public ReviewMapper (Review model) {
+    public ReviewMapper(Review model) {
         this.model = model;
     }
 
-    public ReviewMapper (ReviewEntity entity) {
+    public ReviewMapper(ReviewEntity entity) {
         this.entity = entity;
     }
 
-    public Review mapToModel (Review model) {
+    public Review mapToModel(Review model) {
         model.setReviewId(entity.getReviewId());
         model.setReviewBody(entity.getReviewBody());
         model.setReviewRating(entity.getReviewRating());
@@ -25,7 +25,7 @@ public class ReviewMapper {
         return model;
     }
 
-    public ReviewEntity mapToEntity (ReviewEntity entity) {
+    public ReviewEntity mapToEntity(ReviewEntity entity) {
         entity.setReviewId(model.getReviewId());
         entity.setReviewBody(model.getReviewBody());
         entity.setReviewRating(model.getReviewRating());

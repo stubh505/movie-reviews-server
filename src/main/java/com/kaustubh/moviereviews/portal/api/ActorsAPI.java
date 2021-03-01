@@ -2,8 +2,12 @@ package com.kaustubh.moviereviews.portal.api;
 
 import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
+import com.kaustubh.moviereviews.portal.services.ActorsService;
+import com.kaustubh.moviereviews.portal.services.MoviesService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,38 +17,49 @@ import java.util.List;
 @RequestMapping("/actors")
 public class ActorsAPI {
 
+    @Autowired
+    private ActorsService actorsService;
+
+    @Autowired
+    private MoviesService moviesService;
+
     @GetMapping("/all")
     @ApiOperation("GET all actors")
     @ApiResponse(code = 200, message = "Okay")
     public ResponseEntity<List<Actor>> getActors() {
-        return null;
+        List<Actor> res = actorsService.getAll();
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{actorId}")
     @ApiOperation("GET actor by ID")
     @ApiResponse(code = 200, message = "Okay")
     public ResponseEntity<Actor> getActorById(@PathVariable String actorId) {
-        return null;
+        Actor res = actorsService.getActorById(actorId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{actorId}/movies/all")
     @ApiOperation("GET all movies for actor ID")
     @ApiResponse(code = 200, message = "Okay")
-    public ResponseEntity<List<Movie>> getMovies() {
-        return null;
+    public ResponseEntity<List<Movie>> getMovies(@PathVariable String actorId) {
+        List<Movie> res = moviesService.getMoviesOfActor(actorId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     @ApiOperation("POST method to add new actor")
     @ApiResponse(code = 201, message = "Created")
-    public ResponseEntity<String> addActors() {
-        return null;
+    public ResponseEntity<String> addActors(@RequestBody Actor actor) {
+        String res = actorsService.addActor(actor);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @PutMapping("/add")
+    @PutMapping("/{actorId}")
     @ApiOperation("PUT method to edit existing actor")
     @ApiResponse(code = 201, message = "Created")
-    public ResponseEntity<Actor> editActors() {
-        return null;
+    public ResponseEntity<Actor> editActors(@PathVariable String actorId, @RequestBody Actor actor) {
+        Actor res = actorsService.editActor(actorId, actor);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 }

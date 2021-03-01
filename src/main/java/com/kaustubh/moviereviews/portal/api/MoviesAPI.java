@@ -28,7 +28,7 @@ public class MoviesAPI {
     @GetMapping("/all")
     @ApiOperation("GET all movies")
     @ApiResponse(code = 200, message = "Okay")
-    public ResponseEntity<List<Movie>> getMovies () {
+    public ResponseEntity<List<Movie>> getMovies() {
         List<Movie> movies = moviesService.getAll();
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
@@ -36,7 +36,7 @@ public class MoviesAPI {
     @GetMapping("/{movieId}")
     @ApiOperation("GET movie by ID")
     @ApiResponse(code = 200, message = "Okay")
-    public ResponseEntity<Movie> getMovieById (@PathVariable String movieId) {
+    public ResponseEntity<Movie> getMovieById(@PathVariable String movieId) {
         Movie movie = moviesService.getMovie(movieId);
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class MoviesAPI {
     @PostMapping("/add")
     @ApiOperation("POST method to add new movie")
     @ApiResponse(code = 201, message = "Created")
-    public ResponseEntity<String> addMovie (@RequestBody Movie movie) {
+    public ResponseEntity<String> addMovie(@RequestBody Movie movie) {
         String res = moviesService.addMovie(movie);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
@@ -52,7 +52,7 @@ public class MoviesAPI {
     @PutMapping("/{movieId}")
     @ApiOperation("PUT method to update existing movie")
     @ApiResponse(code = 201, message = "Created")
-    public ResponseEntity<Movie> updateMovie (@PathVariable String movieId, @RequestBody Movie movie) {
+    public ResponseEntity<Movie> updateMovie(@PathVariable String movieId, @RequestBody Movie movie) {
         Movie res = moviesService.editMovie(movieId, movie);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }

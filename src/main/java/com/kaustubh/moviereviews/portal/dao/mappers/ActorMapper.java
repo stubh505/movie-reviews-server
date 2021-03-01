@@ -8,15 +8,15 @@ public class ActorMapper {
     private ActorEntity entity;
     private Actor model;
 
-    public ActorMapper (ActorEntity entity) {
+    public ActorMapper(ActorEntity entity) {
         this.entity = entity;
     }
 
-    public ActorMapper (Actor model) {
+    public ActorMapper(Actor model) {
         this.model = model;
     }
 
-    public Actor mapToModel (Actor model) {
+    public Actor mapToModel(Actor model) {
         model.setActorId(entity.getActorId());
         model.setCountry(entity.getCountry());
         model.setDateOfBirth(entity.getDateOfBirth());
@@ -28,7 +28,7 @@ public class ActorMapper {
         return model;
     }
 
-    public ActorEntity mapToEntity (ActorEntity entity) {
+    public ActorEntity mapToEntity(ActorEntity entity) {
         entity.setCountry(model.getCountry());
         entity.setDateOfBirth(model.getDateOfBirth());
         entity.setGender(model.getGender());

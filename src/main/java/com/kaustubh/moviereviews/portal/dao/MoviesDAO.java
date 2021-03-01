@@ -10,6 +10,7 @@ public interface MoviesDAO {
 
     /**
      * Method to persist new Movie
+     *
      * @param movie Movie object
      * @return movieId
      */
@@ -17,6 +18,7 @@ public interface MoviesDAO {
 
     /**
      * Method to retrieve movie by id
+     *
      * @param movieId movie id
      * @return movie
      */
@@ -24,14 +26,24 @@ public interface MoviesDAO {
 
     /**
      * Method to return all movies
+     *
      * @return List of Movies
      */
     List<Movie> getAll();
 
     /**
+     * Method to return all movies
+     *
+     * @param name actor name
+     * @return List of Movies
+     */
+    List<Movie> getMoviesOfActor(String name);
+
+    /**
      * Method to update details of existing movie
+     *
      * @param movieId movie id
-     * @param movie new movie body
+     * @param movie   new movie body
      * @return persisted movie
      * @throws MovieNotFoundException when movie not found
      */
@@ -39,6 +51,7 @@ public interface MoviesDAO {
 
     /**
      * Method to retrieve actors of existing movie
+     *
      * @param movieId movie id
      * @return list of actors
      * @throws MovieNotFoundException when movie not found

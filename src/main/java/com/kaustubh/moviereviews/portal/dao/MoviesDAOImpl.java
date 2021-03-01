@@ -5,7 +5,6 @@ import com.kaustubh.moviereviews.portal.entities.MoviesEntity;
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
-import com.kaustubh.moviereviews.portal.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
@@ -45,7 +44,7 @@ public class MoviesDAOImpl implements MoviesDAO {
         List<Actor> actors = new ArrayList<>();
         String[] names = entity.getCastActor().split("\\|");
 
-        for (String name:names) {
+        for (String name : names) {
             actors.add(actorsDAO.getActorByName(name));
         }
 
@@ -59,7 +58,21 @@ public class MoviesDAOImpl implements MoviesDAO {
         List<MoviesEntity> moviesEntities = query.getResultList();
         List<Movie> movies = new ArrayList<>();
 
-        for (MoviesEntity entity:moviesEntities) {
+        for (MoviesEntity entity : moviesEntities) {
+            movies.add(new MovieMapper(entity).mapToModel(new Movie()));
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getMoviesOfActor(String actorId) {
+        Query query = entityManager.createQuery("select m from MoviesEntity m where m.castActor like :name");
+        query.setParameter("name", "%" + actorId + "%");
+        List<MoviesEntity> moviesEntities = query.getResultList();
+        List<Movie> movies = new ArrayList<>();
+
+        for (MoviesEntity entity : moviesEntities) {
             movies.add(new MovieMapper(entity).mapToModel(new Movie()));
         }
 
@@ -87,10 +100,10 @@ public class MoviesDAOImpl implements MoviesDAO {
             throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
 
         List<Actor> actors = new ArrayList<>();
-        String[] names = entity.getCastActor().split("\\|");
+        String[] ids = entity.getCastActor().split("\\|");
 
-        for (String name:names) {
-            actors.add(actorsDAO.getActorByName(name));
+        for (String id : ids) {
+            actors.add(actorsDAO.getActorById(id));
         }
 
         return actors;

@@ -9,6 +9,8 @@ import org.springframework.core.env.Environment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActorsDAOImpl implements ActorsDAO {
 
@@ -19,9 +21,38 @@ public class ActorsDAOImpl implements ActorsDAO {
     private Environment environment;
 
     @Override
+    public List<Actor> getAll() {
+        Query query = entityManager.createQuery("select a from ActorEntity a");
+        List<ActorEntity> entities = query.getResultList();
+
+        if (entities == null || entities.isEmpty())
+            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+
+        List<Actor> actors = new ArrayList<>();
+
+        for (ActorEntity entity : entities) {
+            Actor actor = new ActorMapper(entity).mapToModel(new Actor());
+            actors.add(actor);
+        }
+
+        return actors;
+    }
+
+    @Override
+    public Actor getActorById(String actorId) {
+        ActorEntity entity = entityManager.find(ActorEntity.class, actorId);
+
+        if (entity == null)
+            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+
+        Actor actor = new ActorMapper(entity).mapToModel(new Actor());
+        return actor;
+    }
+
+    @Override
     public Actor getActorByName(String name) {
         Query query = entityManager.createQuery("select a from ActorEntity a where a.name = :name");
-        query.setParameter("name", name);
+        query.setParameter("name", "%" + name + "%");
         ActorEntity entity = (ActorEntity) query.getResultList().get(0);
 
         if (entity == null)

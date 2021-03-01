@@ -1,14 +1,14 @@
-package com.kaustubh.moviereviews.portal.dao;
+package com.kaustubh.moviereviews.portal.services;
 
 import com.kaustubh.moviereviews.portal.exceptions.ActorNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Actor;
 
 import java.util.List;
 
-public interface ActorsDAO {
+public interface ActorsService {
 
     /**
-     * Method to retrieve actor by name
+     * Service Method to retrieve actor by name
      *
      * @return list of actor body
      * @throws ActorNotFoundException when actor does not exist
@@ -16,7 +16,7 @@ public interface ActorsDAO {
     List<Actor> getAll();
 
     /**
-     * Method to retrieve actor by id
+     * Service Method to retrieve actor by id
      *
      * @param actorId actor id
      * @return actor body
@@ -25,7 +25,7 @@ public interface ActorsDAO {
     Actor getActorById(String actorId);
 
     /**
-     * Method to retrieve actor by name
+     * Service Method to retrieve actor by name
      *
      * @param name actor name
      * @return actor body
@@ -34,7 +34,7 @@ public interface ActorsDAO {
     Actor getActorByName(String name);
 
     /**
-     * Method to persist new Actor
+     * Service Method to persist new Actor
      *
      * @param actor Actor details
      * @return persisted actor id
@@ -42,7 +42,7 @@ public interface ActorsDAO {
     String addActor(Actor actor);
 
     /**
-     * Method to edit existing Actor
+     * Service Method to edit existing Actor
      *
      * @param actorId actor id
      * @param actor   Actor details

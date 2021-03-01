@@ -13,12 +13,12 @@ public class LoggingUtility {
     private final Logger logger = LoggerFactory.getLogger(LoggingUtility.class);
 
     @AfterThrowing(throwing = "e", pointcut = "execution(* com.kaustubh.moviereviews.portal.services.*Impl.*(..))")
-    public void logServiceExceptions (Exception e) {
+    public void logServiceExceptions(Exception e) {
         logger.error(e.getMessage(), e);
     }
 
     @AfterThrowing(throwing = "e", pointcut = "execution(* com.kaustubh.moviereviews.portal.dao.*Impl.*(..))")
-    public void logDAOExceptions (Exception e) {
+    public void logDAOExceptions(Exception e) {
         logger.error(e.getMessage(), e);
     }
 }

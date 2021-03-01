@@ -7,11 +7,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@PropertySource(value={"classpath:messages.properties"})
+@PropertySource(value = {"classpath:messages.properties"})
 public class MovieReviewsServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MovieReviewsServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MovieReviewsServerApplication.class, args);
+    }
 
 }

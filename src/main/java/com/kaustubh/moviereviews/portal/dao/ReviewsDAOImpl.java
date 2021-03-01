@@ -1,6 +1,5 @@
 package com.kaustubh.moviereviews.portal.dao;
 
-import com.kaustubh.moviereviews.portal.dao.mappers.MovieMapper;
 import com.kaustubh.moviereviews.portal.dao.mappers.ReviewMapper;
 import com.kaustubh.moviereviews.portal.dao.mappers.UserMapper;
 import com.kaustubh.moviereviews.portal.entities.MoviesEntity;
@@ -24,7 +23,8 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     @Autowired
     private Environment environment;
 
-    @Autowired MoviesDAO moviesDAO;
+    @Autowired
+    MoviesDAO moviesDAO;
 
     @Override
     public List<Review> getAllReviews(String movieId) {
@@ -37,7 +37,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
 
         List<Review> reviews = new ArrayList<>();
 
-        for (ReviewEntity entity:reviewEntities) {
+        for (ReviewEntity entity : reviewEntities) {
             reviews.add(new ReviewMapper(entity).mapToModel(new Review()));
         }
 
@@ -55,7 +55,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
 
         List<Review> reviews = new ArrayList<>();
 
-        for (ReviewEntity entity:reviewEntities) {
+        for (ReviewEntity entity : reviewEntities) {
             reviews.add(new ReviewMapper(entity).mapToModel(new Review()));
         }
 

@@ -13,15 +13,15 @@ public class MovieMapper {
     private MoviesEntity entity;
     private Movie model;
 
-    public MovieMapper (MoviesEntity entity) {
+    public MovieMapper(MoviesEntity entity) {
         this.entity = entity;
     }
 
-    public MovieMapper (Movie model) {
+    public MovieMapper(Movie model) {
         this.model = model;
     }
 
-    public MoviesEntity mapToEntity (MoviesEntity entity) {
+    public MoviesEntity mapToEntity(MoviesEntity entity) {
         entity.setName(model.getName());
         entity.setCountry(model.getCountry());
         entity.setDirector(model.getDirector());
@@ -33,20 +33,20 @@ public class MovieMapper {
         entity.setRating(model.getRating());
         entity.setSynopsys(model.getSynopsys());
         StringBuilder s = new StringBuilder();
-        for (Genre g:model.getGenre()) {
+        for (Genre g : model.getGenre()) {
             s.append(g.name()).append("|");
         }
-        entity.setGenre(s.substring(0, s.length()-1));
+        entity.setGenre(s.substring(0, s.length() - 1));
         s = new StringBuilder();
-        for (Actor a:model.getCast()) {
-            s.append(a.getName()).append("|");
+        for (Actor a : model.getCast()) {
+            s.append(a.getActorId()).append("|");
         }
-        entity.setCastActor(s.substring(0, s.length()-1));
-        
+        entity.setCastActor(s.substring(0, s.length() - 1));
+
         return entity;
     }
 
-    public Movie mapToModel (Movie model) {
+    public Movie mapToModel(Movie model) {
         model.setMovieId(entity.getMovieId());
         model.setName(entity.getName());
         model.setCountry(entity.getCountry());
@@ -60,11 +60,11 @@ public class MovieMapper {
         model.setSynopsys(entity.getSynopsys());
         List<Genre> genreList = new ArrayList<>();
         String[] gs = entity.getGenre().split("\\|");
-        for (String g:gs) {
+        for (String g : gs) {
             genreList.add(Genre.valueOf(g));
         }
         model.setGenre(genreList);
-        
+
         return model;
     }
 }

@@ -9,6 +9,7 @@ public interface ReviewsDAO {
 
     /**
      * Method to retrieve all reviews for given movie
+     *
      * @param movieId movie id
      * @return list of reviews
      * @throws ReviewNotFoundException if review does not exist
@@ -17,6 +18,7 @@ public interface ReviewsDAO {
 
     /**
      * Method to retrieve all reviews for given user
+     *
      * @param userId user id
      * @return list of reviews
      * @throws ReviewNotFoundException if review does not exist
@@ -25,6 +27,7 @@ public interface ReviewsDAO {
 
     /**
      * Method to add new review
+     *
      * @param review review details
      * @return persisted review id
      */
@@ -32,6 +35,7 @@ public interface ReviewsDAO {
 
     /**
      * Method to edit existing review for given movie
+     *
      * @param reviewId review id
      * @return updated review
      * @throws ReviewNotFoundException if review does not exist
@@ -40,6 +44,7 @@ public interface ReviewsDAO {
 
     /**
      * Method to delete existing review for given movie
+     *
      * @param reviewId review id
      * @return deleted review id
      * @throws ReviewNotFoundException if review does not exist

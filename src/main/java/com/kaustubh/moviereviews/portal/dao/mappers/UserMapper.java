@@ -4,19 +4,19 @@ import com.kaustubh.moviereviews.portal.entities.UserEntity;
 import com.kaustubh.moviereviews.portal.models.User;
 
 public class UserMapper {
-    
+
     private User model;
     private UserEntity entity;
-    
-    public UserMapper (User model) {
+
+    public UserMapper(User model) {
         this.model = model;
     }
-    
-    public  UserMapper (UserEntity entity) {
+
+    public UserMapper(UserEntity entity) {
         this.entity = entity;
     }
-    
-    public User mapToModel (User model) {
+
+    public User mapToModel(User model) {
         model.setName(entity.getName());
         model.setDateOfBirth(entity.getDateOfBirth());
         model.setEmail(entity.getEmail());
@@ -26,11 +26,11 @@ public class UserMapper {
         model.setUserType(entity.getUserType());
         model.setReviewCount(entity.getReviewCount());
         model.setDateOfJoining(entity.getDateOfJoining());
-        
+
         return model;
     }
 
-    public UserEntity mapToEntity (UserEntity entity) {
+    public UserEntity mapToEntity(UserEntity entity) {
         entity.setName(model.getName());
         entity.setDateOfBirth(model.getDateOfBirth());
         entity.setEmail(model.getEmail());
