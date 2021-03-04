@@ -42,16 +42,16 @@ public class Actor {
         return country;
     }
 
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
 
     public Gender getGender() {

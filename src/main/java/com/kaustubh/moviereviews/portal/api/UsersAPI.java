@@ -25,7 +25,7 @@ public class UsersAPI {
 
     @GetMapping("/{userId}")
     @ApiOperation("GET user by ID")
-    @ApiResponse(code = 200, message = "User retrieved")
+    @ApiResponse(code = 200, message = "User retrieved successfully")
     public ResponseEntity<User> getUserById(@PathVariable String userId) {
         User res = usersService.getUser(userId);
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -33,10 +33,26 @@ public class UsersAPI {
 
     @GetMapping("/{userId}/reviews/all")
     @ApiOperation("GET all reviews for user ID")
-    @ApiResponse(code = 200, message = "Reviews retrieved")
+    @ApiResponse(code = 200, message = "Reviews retrieved successfully")
     public ResponseEntity<List<Review>> getReviews(@PathVariable String userId) {
         List<Review> res = reviewsService.getUserReviews(userId);
         return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PutMapping("/{userId}/reviews/{reviewId}")
+    @ApiOperation("PUT method to edit review for user ID")
+    @ApiResponse(code = 201, message = "Review updated successfully")
+    public ResponseEntity<Review> editReview(@PathVariable String reviewId, @RequestBody Review review) {
+        Review res = reviewsService.editReview(reviewId, review);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{userId}/reviews/{reviewId}")
+    @ApiOperation("GET all reviews for user ID")
+    @ApiResponse(code = 204, message = "Review deleted successfully")
+    public ResponseEntity<String> deleteReview(@PathVariable String reviewId) {
+        String res = reviewsService.deleteReview(reviewId);
+        return new ResponseEntity<>(res, HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/register")

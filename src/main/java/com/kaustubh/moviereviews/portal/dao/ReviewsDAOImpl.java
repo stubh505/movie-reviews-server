@@ -20,13 +20,11 @@ import java.util.List;
 public class ReviewsDAOImpl implements ReviewsDAO {
 
     @Autowired
+    MoviesDAO moviesDAO;
+    @Autowired
     private EntityManager entityManager;
-
     @Autowired
     private Environment environment;
-
-    @Autowired
-    MoviesDAO moviesDAO;
 
     @Override
     public List<Review> getAllReviews(String movieId) {
@@ -69,6 +67,11 @@ public class ReviewsDAOImpl implements ReviewsDAO {
         ReviewEntity entity = new ReviewMapper(review).mapToEntity(new ReviewEntity());
         MoviesEntity moviesEntity = entityManager.find(MoviesEntity.class, review.getMovie().getMovieId());
         UserEntity userEntity = new UserMapper(review.getUser()).mapToEntity(new UserEntity());
+        userEntity.setReviewCount(userEntity.getReviewCount() + 1);
+        String[] reviews = moviesEntity.getReviews().split("\\|");
+        String r = "|" + (Integer.parseInt(reviews[1]) + 1);
+        r = (Integer.parseInt(reviews[0]) + review.getReviewRating().ordinal()) + r;
+        moviesEntity.setReviews(r);
         entity.setMovie(moviesEntity);
         entity.setUser(userEntity);
 
@@ -83,6 +86,13 @@ public class ReviewsDAOImpl implements ReviewsDAO {
         if (entity == null)
             throw new ReviewNotFoundException(environment.getProperty("REVIEW_404"));
 
+        MoviesEntity moviesEntity = entity.getMovie();
+        String[] reviews = moviesEntity.getReviews().split("\\|");
+        String r = "|" + (Integer.parseInt(reviews[1]));
+        r = (Integer.parseInt(reviews[0]) - entity.getReviewRating().ordinal() + review.getReviewRating().ordinal()) + r;
+        moviesEntity.setReviews(r);
+        entityManager.persist(moviesEntity);
+
         entity = new ReviewMapper(review).mapToEntity(entity);
         entityManager.persist(entity);
         review.setReviewId(entity.getReviewId());
@@ -96,6 +106,13 @@ public class ReviewsDAOImpl implements ReviewsDAO {
 
         if (entity == null)
             throw new ReviewNotFoundException(environment.getProperty("REVIEW_404"));
+
+        MoviesEntity moviesEntity = entity.getMovie();
+        String[] reviews = moviesEntity.getReviews().split("\\|");
+        String r = "|" + (Integer.parseInt(reviews[1]) - 1);
+        r = (Integer.parseInt(reviews[0]) - entity.getReviewRating().ordinal()) + r;
+        moviesEntity.setReviews(r);
+        entityManager.persist(moviesEntity);
 
         entity.setUser(null);
         entity.setMovie(null);

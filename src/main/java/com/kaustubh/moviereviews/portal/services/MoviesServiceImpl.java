@@ -19,13 +19,11 @@ import java.util.List;
 @Transactional
 public class MoviesServiceImpl implements MoviesService {
 
+    private final Logger logger = LoggerFactory.getLogger(MoviesServiceImpl.class);
     @Autowired
     private MoviesDAO moviesDAO;
-
     @Autowired
     private Environment environment;
-
-    private final Logger logger = LoggerFactory.getLogger(MoviesServiceImpl.class);
 
     @Override
     public String addMovie(Movie movie) {

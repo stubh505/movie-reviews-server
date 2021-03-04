@@ -1,6 +1,7 @@
 package com.kaustubh.moviereviews.portal.dao;
 
 import com.kaustubh.moviereviews.portal.dao.mappers.MovieMapper;
+import com.kaustubh.moviereviews.portal.entities.ActorEntity;
 import com.kaustubh.moviereviews.portal.entities.MoviesEntity;
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Actor;
@@ -30,6 +31,15 @@ public class MoviesDAOImpl implements MoviesDAO {
     public String addMovie(Movie movie) {
         MoviesEntity moviesEntity = new MovieMapper(movie).mapToEntity(new MoviesEntity());
         entityManager.persist(moviesEntity);
+
+        String[] actorIds = moviesEntity.getCastActor().split("\\|");
+
+        for (String id : actorIds) {
+            ActorEntity entity = entityManager.find(ActorEntity.class, id);
+            entity.setMovieCount(entity.getMovieCount() + 1);
+            entityManager.persist(entity);
+        }
+
         return moviesEntity.getMovieId();
     }
 

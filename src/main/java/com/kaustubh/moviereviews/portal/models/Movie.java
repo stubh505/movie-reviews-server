@@ -18,6 +18,8 @@ public class Movie {
     private List<Genre> genre;
     private String poster;
     private String trailer;
+    private String review;
+    private String reviewCount;
     private int length;
     private Rating rating;
     private Language language;
@@ -95,6 +97,22 @@ public class Movie {
         this.trailer = trailer;
     }
 
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public String getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(String reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
     public int getLength() {
         return length;
     }
@@ -132,6 +150,7 @@ public class Movie {
         return "Movie{" +
                 "movieId='" + movieId + '\'' +
                 ", name='" + name + '\'' +
+                ", cast=" + cast +
                 ", releaseDate=" + releaseDate +
                 ", director='" + director + '\'' +
                 ", synopsys='" + synopsys + '\'' +

@@ -17,13 +17,11 @@ import java.util.List;
 @Transactional
 public class ActorsServiceImpl implements ActorsService {
 
+    private final Logger logger = LoggerFactory.getLogger(ActorsServiceImpl.class);
     @Autowired
     private ActorsDAO actorsDAO;
-
     @Autowired
     private Environment environment;
-
-    private final Logger logger = LoggerFactory.getLogger(ActorsServiceImpl.class);
 
     @Override
     public List<Actor> getAll() {

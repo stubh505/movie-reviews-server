@@ -17,13 +17,11 @@ import java.util.List;
 @Transactional
 public class ReviewsServiceImpl implements ReviewsService {
 
+    private final Logger logger = LoggerFactory.getLogger(ReviewsServiceImpl.class);
     @Autowired
     private ReviewsDAO reviewsDAO;
-
     @Autowired
     private Environment environment;
-
-    private final Logger logger = LoggerFactory.getLogger(ReviewsServiceImpl.class);
 
     @Override
     public List<Review> getAllReviews(String movieId) {

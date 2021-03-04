@@ -46,6 +46,7 @@ public class MoviesEntity {
     private String poster;
     private String trailer;
     private int length;
+    private String reviews;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "rating_type")
     @Type(type = "pgsql_enum")
@@ -121,6 +122,14 @@ public class MoviesEntity {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public String getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(String reviews) {
+        this.reviews = reviews;
     }
 
     public String getTrailer() {

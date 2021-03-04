@@ -25,7 +25,7 @@ public class ActorsAPI {
 
     @GetMapping("/all")
     @ApiOperation("GET all actors")
-    @ApiResponse(code = 200, message = "Okay")
+    @ApiResponse(code = 200, message = "Actors retrieved successfully")
     public ResponseEntity<List<Actor>> getActors() {
         List<Actor> res = actorsService.getAll();
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -33,15 +33,15 @@ public class ActorsAPI {
 
     @GetMapping("/{actorId}")
     @ApiOperation("GET actor by ID")
-    @ApiResponse(code = 200, message = "Okay")
+    @ApiResponse(code = 200, message = "Actor retrieved successfully")
     public ResponseEntity<Actor> getActorById(@PathVariable String actorId) {
         Actor res = actorsService.getActorById(actorId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @GetMapping("/{actorId}/movies/all")
+    @GetMapping("/{actorId}/movies")
     @ApiOperation("GET all movies for actor ID")
-    @ApiResponse(code = 200, message = "Okay")
+    @ApiResponse(code = 200, message = "Movies retrieved successfully")
     public ResponseEntity<List<Movie>> getMovies(@PathVariable String actorId) {
         List<Movie> res = moviesService.getMoviesOfActor(actorId);
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class ActorsAPI {
 
     @PostMapping("/add")
     @ApiOperation("POST method to add new actor")
-    @ApiResponse(code = 201, message = "Created")
+    @ApiResponse(code = 201, message = "Actor added successfully")
     public ResponseEntity<String> addActors(@RequestBody Actor actor) {
         String res = actorsService.addActor(actor);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
@@ -57,7 +57,7 @@ public class ActorsAPI {
 
     @PutMapping("/{actorId}")
     @ApiOperation("PUT method to edit existing actor")
-    @ApiResponse(code = 201, message = "Created")
+    @ApiResponse(code = 201, message = "Actor updated successfully")
     public ResponseEntity<Actor> editActors(@PathVariable String actorId, @RequestBody Actor actor) {
         Actor res = actorsService.editActor(actorId, actor);
         return new ResponseEntity<>(res, HttpStatus.CREATED);

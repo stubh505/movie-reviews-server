@@ -15,13 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UsersServiceImpl implements UsersService {
 
+    private final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
     @Autowired
     private UsersDAO usersDAO;
-
     @Autowired
     private Environment environment;
-
-    private final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
 
     @Override
     public User getUser(String userId) {

@@ -17,10 +17,10 @@ import java.util.Properties;
 
 public class IdGen implements IdentifierGenerator, Configurable {
 
-    private String prefix;
-    private String entity;
     private static final String PREFIX = "sequence_prefix";
     private static final String ENTITY = "entity_name";
+    private String prefix;
+    private String entity;
 
     @Override
     public Serializable generate(SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException {
