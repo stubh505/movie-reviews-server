@@ -1,11 +1,12 @@
 package com.kaustubh.moviereviews.portal.api;
 
-import com.kaustubh.moviereviews.portal.dao.MoviesDAO;
+import com.kaustubh.moviereviews.portal.services.SearchService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 public class SearchAPI {
 
     @Autowired
-    private MoviesDAO moviesDAO;
+    private SearchService searchService;
 
     @GetMapping("/")
     @ApiOperation(value = "Search for movies or actors", notes = "Returns list of movies and actors")
@@ -31,6 +32,7 @@ public class SearchAPI {
     )
     public ResponseEntity<List<Object>> search(
             @ApiParam(value = "Search query", required = true) @RequestParam String query) {
-        return null;
+        List<Object> res = searchService.search(query);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

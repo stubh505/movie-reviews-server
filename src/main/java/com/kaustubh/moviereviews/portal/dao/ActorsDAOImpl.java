@@ -85,4 +85,24 @@ public class ActorsDAOImpl implements ActorsDAO {
 
         return actor;
     }
+
+    @Override
+    public List<Actor> searchActor(String q) {
+        Query query = entityManager.createQuery("select a from ActorEntity a where a.name like :name");
+        query.setParameter("name", "%" + q + "%");
+        List<ActorEntity> entities = query.getResultList();
+
+        List<Actor> actors = null;
+
+        if (entities != null && !entities.isEmpty()) {
+            actors = new ArrayList<>();
+
+            for (ActorEntity entity : entities) {
+                Actor actor = new ActorMapper(entity).mapToModel(new Actor());
+                actors.add(actor);
+            }
+        }
+
+        return actors;
+    }
 }

@@ -49,4 +49,11 @@ public interface ActorsDAO {
      * @return updated actor
      */
     Actor editActor(String actorId, Actor actor);
+
+    /**
+     * Method to search actor by name
+     *
+     * @param query search query
+     */
+    List<Actor> searchActor(String query);
 }

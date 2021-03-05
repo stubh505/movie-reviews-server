@@ -57,4 +57,11 @@ public interface MoviesDAO {
      * @throws MovieNotFoundException when movie not found
      */
     List<Actor> getAllActors(String movieId);
+
+    /**
+     * Method to search movie by name
+     *
+     * @param query search query
+     */
+    List<Movie> searchMovie(String query);
 }

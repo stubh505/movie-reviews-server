@@ -119,4 +119,22 @@ public class MoviesDAOImpl implements MoviesDAO {
 
         return actors;
     }
+
+    @Override
+    public List<Movie> searchMovie(String name) {
+        Query query = entityManager.createQuery("select m from MoviesEntity m where m.name like :name");
+        query.setParameter("name", "%" + name + "%");
+        List<MoviesEntity> moviesEntities = query.getResultList();
+        List<Movie> movies = null;
+
+        if (moviesEntities != null && !moviesEntities.isEmpty()) {
+            movies = new ArrayList<>();
+
+            for (MoviesEntity entity : moviesEntities) {
+                movies.add(new MovieMapper(entity).mapToModel(new Movie()));
+            }
+        }
+
+        return movies;
+    }
 }
