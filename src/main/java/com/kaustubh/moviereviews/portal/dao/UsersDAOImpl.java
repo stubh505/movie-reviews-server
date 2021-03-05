@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDate;
 
 @Repository
 public class UsersDAOImpl implements UsersDAO {
@@ -36,6 +37,7 @@ public class UsersDAOImpl implements UsersDAO {
     @Override
     public String addUser(User user) {
         UserEntity entity = new UserMapper(user).mapToEntity(new UserEntity());
+        entity.setDateOfJoining(LocalDate.now());
         entityManager.persist(entity);
         return entity.getUserId();
     }

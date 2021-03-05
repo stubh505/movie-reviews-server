@@ -30,6 +30,7 @@ public class MoviesDAOImpl implements MoviesDAO {
     @Override
     public String addMovie(Movie movie) {
         MoviesEntity moviesEntity = new MovieMapper(movie).mapToEntity(new MoviesEntity());
+        moviesEntity.setReviews("0|0");
         entityManager.persist(moviesEntity);
 
         String[] actorIds = moviesEntity.getCastActor().split("\\|");

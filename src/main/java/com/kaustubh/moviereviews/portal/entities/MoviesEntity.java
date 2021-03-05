@@ -46,6 +46,7 @@ public class MoviesEntity {
     private String poster;
     private String trailer;
     private int length;
+    @Column(length = 15)
     private String reviews;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "rating_type")

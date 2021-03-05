@@ -67,6 +67,7 @@ public class ActorsDAOImpl implements ActorsDAO {
     @Override
     public String addActor(Actor actor) {
         ActorEntity entity = new ActorMapper(actor).mapToEntity(new ActorEntity());
+        entity.setMovieCount(0);
         entityManager.persist(entity);
         return entity.getActorId();
     }

@@ -4,25 +4,44 @@ import com.kaustubh.moviereviews.portal.enums.Country;
 import com.kaustubh.moviereviews.portal.enums.Genre;
 import com.kaustubh.moviereviews.portal.enums.Language;
 import com.kaustubh.moviereviews.portal.enums.Rating;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@ApiModel("Movie Model")
 public class Movie {
+
+    @ApiModelProperty(value = "Generated movie Id")
     private String movieId;
+    @ApiModelProperty(value = "Movie name", required = true)
     private String name;
+    @ApiModelProperty(value = "Movie Release date", required = true)
     private LocalDate releaseDate;
+    @ApiModelProperty(value = "Movie director", required = true)
     private String director;
+    @ApiModelProperty(value = "List of Actors", required = true)
     private List<Actor> cast;
+    @ApiModelProperty(value = "Movie Synopsys", required = true)
     private String synopsys;
+    @ApiModelProperty(value = "List of movie genres", required = true)
     private List<Genre> genre;
+    @ApiModelProperty(value = "Link to poster image", required = true)
     private String poster;
+    @ApiModelProperty(value = "Link to movie trailer", required = true)
     private String trailer;
+    @ApiModelProperty(value = "Numeric review rating, calculated by system")
     private String review;
+    @ApiModelProperty(value = "Number of movie reviews, updated by system")
     private String reviewCount;
+    @ApiModelProperty(value = "Length of movie in minutes", required = true)
     private int length;
+    @ApiModelProperty(value = "Movie Rating", required = true)
     private Rating rating;
+    @ApiModelProperty(value = "Movie Language", required = true)
     private Language language;
+    @ApiModelProperty(value = "Movie country", required = true)
     private Country country;
 
     public String getMovieId() {

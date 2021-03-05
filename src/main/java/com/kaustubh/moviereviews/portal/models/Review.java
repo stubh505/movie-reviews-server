@@ -1,13 +1,23 @@
 package com.kaustubh.moviereviews.portal.models;
 
 import com.kaustubh.moviereviews.portal.enums.ReviewRating;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel("Review Model")
 public class Review {
+
+    @ApiModelProperty("Generated Review Id")
     private String reviewId;
+    @ApiModelProperty(value = "Review title within 100 characters", required = true)
     private String reviewTitle;
+    @ApiModelProperty(value = "Review body within 2000 characters", required = true)
     private String reviewBody;
+    @ApiModelProperty(value = "Review rating", required = true)
     private ReviewRating reviewRating;
+    @ApiModelProperty(value = "Reference to movie reviewed", required = true)
     private Movie movie;
+    @ApiModelProperty(value = "Reference to reviewer user", required = true)
     private User user;
 
     public String getReviewId() {
