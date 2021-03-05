@@ -7,11 +7,15 @@ import com.kaustubh.moviereviews.portal.models.Actor;
 import com.kaustubh.moviereviews.portal.models.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Service
+@Transactional
 public class SearchServiceImpl implements SearchService {
 
     @Autowired
