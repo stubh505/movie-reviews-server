@@ -58,7 +58,11 @@ public class MovieMapper {
         model.setTrailer(entity.getTrailer());
         model.setRating(entity.getRating());
         String[] reviews = entity.getReviews().split("\\|");
-        model.setReview(Integer.parseInt(reviews[0]) / Integer.parseInt(reviews[1]) + "");
+        try {
+            model.setReview(Integer.parseInt(reviews[0]) / Integer.parseInt(reviews[1]) + "");
+        } catch (ArithmeticException e) {
+            model.setReview("0");
+        }
         model.setReviewCount(reviews[1]);
         model.setSynopsys(entity.getSynopsys());
         List<Genre> genreList = new ArrayList<>();
