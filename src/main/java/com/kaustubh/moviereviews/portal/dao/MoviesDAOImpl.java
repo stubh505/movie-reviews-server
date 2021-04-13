@@ -69,6 +69,9 @@ public class MoviesDAOImpl implements MoviesDAO {
         List<MoviesEntity> moviesEntities = query.getResultList();
         List<Movie> movies = new ArrayList<>();
 
+        if (moviesEntities == null || moviesEntities.isEmpty())
+            throw new MovieNotFoundException(environment.getProperty("MOVIE_404"));
+
         for (MoviesEntity entity : moviesEntities) {
             movies.add(new MovieMapper(entity).mapToModel(new Movie()));
         }
