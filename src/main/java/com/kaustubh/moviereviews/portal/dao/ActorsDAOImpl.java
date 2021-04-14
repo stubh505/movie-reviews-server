@@ -55,10 +55,14 @@ public class ActorsDAOImpl implements ActorsDAO {
     public Actor getActorByName(String name) {
         Query query = entityManager.createQuery("select a from ActorEntity a where a.name = :name");
         query.setParameter("name", "%" + name + "%");
-        ActorEntity entity = (ActorEntity) query.getResultList().get(0);
+        ActorEntity entity = null;
 
-        if (entity == null)
+        List entityList = query.getResultList();
+
+        if (entityList == null || entityList.isEmpty())
             throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+
+        entity = (ActorEntity) entityList.get(0);
 
         Actor actor = new ActorMapper(entity).mapToModel(new Actor());
         return actor;
