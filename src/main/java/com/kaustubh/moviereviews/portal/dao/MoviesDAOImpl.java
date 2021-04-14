@@ -53,10 +53,10 @@ public class MoviesDAOImpl implements MoviesDAO {
 
         Movie movie = new MovieMapper(entity).mapToModel(new Movie());
         List<Actor> actors = new ArrayList<>();
-        String[] names = entity.getCastActor().split("\\|");
+        String[] ids = entity.getCastActor().split("\\|");
 
-        for (String name : names) {
-            actors.add(actorsDAO.getActorByName(name));
+        for (String id : ids) {
+            actors.add(actorsDAO.getActorById(id));
         }
 
         movie.setCast(actors);
