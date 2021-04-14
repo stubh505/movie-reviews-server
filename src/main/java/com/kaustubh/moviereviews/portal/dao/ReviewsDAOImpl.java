@@ -28,7 +28,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
 
     @Override
     public List<Review> getAllReviews(String movieId) {
-        Query query = entityManager.createQuery("select r for ReviewEntity r where r.movie.movieId = :movie");
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.movie.movieId = :movie");
         query.setParameter("movie", movieId);
         List<ReviewEntity> reviewEntities = query.getResultList();
 
@@ -46,7 +46,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
 
     @Override
     public List<Review> getUserReviews(String userId) {
-        Query query = entityManager.createQuery("select r for ReviewEntity r where r.user.userId = :user");
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.user.userId = :user");
         query.setParameter("user", userId);
         List<ReviewEntity> reviewEntities = query.getResultList();
 
