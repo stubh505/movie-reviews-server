@@ -89,7 +89,7 @@ public class ActorsServiceImpl implements ActorsService {
         Actor res = actorsDAO.editActor(actorId, actor);
 
         if (res == null)
-            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
+            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
 
         logger.info("Persisted actor with details " + res);
         return res;
