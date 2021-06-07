@@ -1,7 +1,6 @@
 package com.kaustubh.moviereviews.portal.services;
 
 import com.kaustubh.moviereviews.portal.dao.MoviesDAO;
-import com.kaustubh.moviereviews.portal.exceptions.ActorNotFoundException;
 import com.kaustubh.moviereviews.portal.exceptions.InvalidMovieException;
 import com.kaustubh.moviereviews.portal.exceptions.MovieNotFoundException;
 import com.kaustubh.moviereviews.portal.models.Actor;
@@ -88,7 +87,7 @@ public class MoviesServiceImpl implements MoviesService {
             throw new InvalidMovieException(environment.getProperty("MOVIE_INVALID"));
 
         logger.info("Editing movie with id : " + movieId);
-        logger.info("Updating with new details : " + movie);
+        logger.debug("Updating with new details : " + movie);
         Movie res = moviesDAO.editMovie(movieId, movie);
 
         if (res == null)
@@ -107,7 +106,7 @@ public class MoviesServiceImpl implements MoviesService {
         List<Actor> res = moviesDAO.getAllActors(movieId);
 
         if (res == null || res.isEmpty())
-            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+            throw new MovieNotFoundException(environment.getProperty("ACTOR_404"));
 
         logger.info("All actors retrieved");
         return res;

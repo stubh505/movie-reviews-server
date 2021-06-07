@@ -74,7 +74,7 @@ public class ActorsServiceImpl implements ActorsService {
         String res = actorsDAO.addActor(actor);
 
         if (res == null || res.equals(""))
-            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
 
         logger.info("Persisted actor with id " + res);
         return res;
@@ -89,7 +89,7 @@ public class ActorsServiceImpl implements ActorsService {
         Actor res = actorsDAO.editActor(actorId, actor);
 
         if (res == null)
-            throw new ActorNotFoundException(environment.getProperty("ACTOR_404"));
+            throw new InvalidActorException(environment.getProperty("ACTOR_INVALID"));
 
         logger.info("Persisted actor with details " + res);
         return res;

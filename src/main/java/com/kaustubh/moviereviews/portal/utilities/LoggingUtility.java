@@ -27,11 +27,11 @@ public class LoggingUtility {
 
     @AfterReturning(pointcut = "execution(* com.kaustubh.moviereviews.portal.services.*Impl.*(..))", returning = "res")
     public void logServiceReturns(JoinPoint joinPoint, Object res) {
-        logger.info(joinPoint.getSignature() + " completed successfully.\nReturned : " + res.toString());
+        logger.debug(joinPoint.getSignature() + " completed successfully.\nReturned : " + res.toString());
     }
 
     @Before(value = "execution(* com.kaustubh.moviereviews.portal.services.*Impl.*(..))")
     public void logServiceCalls(JoinPoint joinPoint) {
-        logger.info("Executing " + joinPoint.getSignature());
+        logger.debug("Executing " + joinPoint.getSignature());
     }
 }

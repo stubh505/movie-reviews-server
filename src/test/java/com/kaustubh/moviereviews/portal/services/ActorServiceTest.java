@@ -102,7 +102,7 @@ public class ActorServiceTest {
         Mockito.when(actorsDAO.addActor(Mockito.any(Actor.class))).thenReturn("");
         Mockito.when(environment.getProperty(Mockito.anyString())).thenReturn("Exception");
 
-        Assert.assertThrows(ActorNotFoundException.class, () -> actorsService.addActor(new Actor()));
+        Assert.assertThrows(InvalidActorException.class, () -> actorsService.addActor(new Actor()));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ActorServiceTest {
         Mockito.when(actorsDAO.addActor(Mockito.any(Actor.class))).thenReturn(null);
         Mockito.when(environment.getProperty(Mockito.anyString())).thenReturn("Exception");
 
-        Assert.assertThrows(ActorNotFoundException.class, () -> actorsService.addActor(new Actor()));
+        Assert.assertThrows(InvalidActorException.class, () -> actorsService.addActor(new Actor()));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ActorServiceTest {
         Mockito.when(actorsDAO.editActor(Mockito.anyString(), Mockito.any(Actor.class))).thenReturn(null);
         Mockito.when(environment.getProperty(Mockito.anyString())).thenReturn("Exception");
 
-        Assert.assertThrows(ActorNotFoundException.class, () -> actorsService.editActor("A1001", new Actor()));
+        Assert.assertThrows(InvalidActorException.class, () -> actorsService.editActor("A1001", new Actor()));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class ActorServiceTest {
         Mockito.when(actorsDAO.editActor(Mockito.anyString(), Mockito.any(Actor.class))).thenReturn(null);
         Mockito.when(environment.getProperty(Mockito.anyString())).thenReturn("Exception");
 
-        Assert.assertThrows(ActorNotFoundException.class, () -> actorsService.editActor("A1001", new Actor()));
+        Assert.assertThrows(InvalidActorException.class, () -> actorsService.editActor("A1001", new Actor()));
     }
 
     @Test

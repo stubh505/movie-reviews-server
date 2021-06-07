@@ -31,7 +31,7 @@ public class ReviewsServiceImpl implements ReviewsService {
         logger.info("Getting reviews for movie id " + movieId);
         List<Review> res = reviewsDAO.getAllReviews(movieId);
 
-        if (res == null)
+        if (res == null || res.isEmpty())
             throw new ReviewNotFoundException(environment.getProperty("REVIEW_404"));
 
         logger.info("Retrieved all reviews");
@@ -46,7 +46,7 @@ public class ReviewsServiceImpl implements ReviewsService {
         logger.info("Getting reviews for user id " + userId);
         List<Review> res = reviewsDAO.getUserReviews(userId);
 
-        if (res == null)
+        if (res == null || res.isEmpty())
             throw new ReviewNotFoundException(environment.getProperty("REVIEW_404"));
 
         logger.info("Retrieved all reviews");
@@ -61,7 +61,7 @@ public class ReviewsServiceImpl implements ReviewsService {
         logger.info("Adding new review to movie with id : " + movieId + "\n" + review);
         String res = reviewsDAO.addReview(review);
 
-        if (res == null)
+        if (res == null || res.equals(""))
             throw new InvalidReviewException(environment.getProperty("REVIEW_INVALID"));
 
         logger.info("Persisted new review with id " + res);
@@ -92,7 +92,7 @@ public class ReviewsServiceImpl implements ReviewsService {
         String res = reviewsDAO.deleteReview(reviewId);
 
         if (res == null)
-            throw new InvalidReviewException(environment.getProperty("REVIEW_NOT_DELETED"));
+            throw new ReviewNotFoundException(environment.getProperty("REVIEW_NOT_DELETED"));
 
         logger.info("Update review with details " + res);
         return res;
